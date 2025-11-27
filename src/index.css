@@ -1,2 +1,52 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@layer base {
+  h1 {
+    @apply text-5xl;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    @apply text-3xl;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    @apply text-xl;
+    @apply font-bold;
+
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    @apply text-lg;
+    margin-bottom: 0.5rem;
+  }
+
+  li {
+    @apply text-lg;
+    margin-left: 2rem;
+  }
+
+  ul {
+    margin-bottom: 1rem;
+  }
+
+  table {
+    @apply table;
+    margin-bottom: 1rem;
+  }
+
+  code {
+    @apply c;
+  }
+
+  .mockup-code {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
