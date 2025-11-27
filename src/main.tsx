@@ -3,11 +3,16 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./routes/App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import Documentation from "./routes/documentation/Documentation.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/documentation",
+    element: <Documentation />,
   },
 ]);
 
