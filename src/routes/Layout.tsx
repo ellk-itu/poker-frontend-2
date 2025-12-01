@@ -3,14 +3,15 @@ import LightModeIcon from "../assets/lightMode.svg?react";
 import NightModeIcon from "../assets/nightMode.svg?react";
 import { useEffect, useState } from "react";
 
-//TODO implement localstorage for preferences
-
 export default function Layout() {
   const [currentTheme, setCurrentTheme] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches
+    localStorage.getItem("theme") == "dark" ||
+      window.matchMedia("(prefers-color-scheme: dark)").matches
   );
 
   useEffect(() => {
+    localStorage.setItem("theme", currentTheme ? "dark" : "light");
+
     document
       .querySelector("html")
       ?.setAttribute("data-theme", currentTheme ? "dark" : "light");

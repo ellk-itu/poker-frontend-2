@@ -7,9 +7,9 @@ export default function Documentation() {
     <div className="flex flex-col items-center">
       <article className="max-w-1/2">
         <h1>{language === "python" ? "Python" : "Java"} Documentation</h1>
-        <div className="center-div">
+        <div className="flex gap-2">
           <button
-            className="btn"
+            className="btn btn-neutral"
             onClick={() => {
               setLanguage("java");
             }}
@@ -17,7 +17,7 @@ export default function Documentation() {
             Show java
           </button>
           <button
-            className="btn"
+            className="btn btn-neutral"
             onClick={() => {
               setLanguage("python");
             }}
