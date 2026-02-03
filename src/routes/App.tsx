@@ -1,41 +1,28 @@
-import { Link } from "react-router";
-import backgroundImage from "../assets/IMG_2584 1.png";
-import QuackSound from "../assets/quack.mp3";
+import Hero from "./components/Hero";
 
 export default function App() {
-  const quackAudio = new Audio(QuackSound);
-
   return (
-    <>
-      <div className="absolute h-full w-full left-0 top-0">
-        <div className="absolute h-full w-full left-0 bg-linear-to-br from-base-100 to-transparent" />
-        <img src={backgroundImage} className="h-full w-full object-cover" />
-      </div>
-      <div
-        className={`flex flex-col justify-center w-screen flex-1 gap-4 px-24 relative`}
-      >
-        <div className="flex flex-col">
-          <p className="font-display-alternative text-6xl m-0">
-            Poker{" "}
-            <span className="text-primary" onClick={() => quackAudio.play()}>
-              Bot
-            </span>
+    <div className="flex flex-col gap-8 flex-1">
+      <Hero />
+      <div className="flex gap-8 p-16 h-fit">
+        <div className="bg-base-200 flex-1 h-24 py-8 px-16 rounded-2xl flex-1">
+          <p className="font-text font-bold text-4xl m-0">
+            Show Off Your Algorithmic Prowess
           </p>
-          <p className="font-display text-8xl/[0.6]">Battles</p>
+          <p>
+            Test your skills against other ITU students by creating a
+            poker-playing algorithm, and use it to battle it on our homemade
+            server.
+          </p>
+          <p>
+            Languages include ones you&#0027;ve (probably) already encountered.
+            We offer documentation in both Python and Java for the lowest
+            barrier to entry
+          </p>
         </div>
-        <p className="text-xl">
-          Somthing cool about how cool and <br />
-          awsomesauce poker bot is! :3
-        </p>
-        <div className="flex gap-2">
-          <Link to={"/get-started"} className="btn btn-primary btn-lg">
-            Get Started
-          </Link>
-          <Link to={"/documentation"} className="btn btn-primary btn-lg">
-            Documentation
-          </Link>
-        </div>
+        <div className="bg-base-200 flex-1 h-24"></div>
+        <div className="bg-primary flex-1 h-24"></div>
       </div>
-    </>
+    </div>
   );
 }

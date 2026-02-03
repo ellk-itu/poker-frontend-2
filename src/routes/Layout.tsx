@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function Layout() {
   const [currentTheme, setCurrentTheme] = useState(
     localStorage.getItem("theme") == "dark" ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches
+      window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Layout() {
           Poker <span className="text-primary">Bot</span> Battles
         </Link>
         <div className="flex gap-2">
-          <Link to={"/sign-up"} target="_blank" className="btn btn-primary">
+          <Link to={"/sign-up"} className="btn btn-primary">
             Sign Up
           </Link>
           <Link to={"/get-started"} className="btn btn-neutral">
