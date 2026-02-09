@@ -8,10 +8,12 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import SignUp from "./routes/sign-up/SignUp.tsx";
 import Submit from "./routes/submit/Submit.tsx";
 import Layout from "./routes/Layout.tsx";
+import ScrollToTop from "./common/ScrollTop.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
@@ -22,5 +24,5 @@ createRoot(document.getElementById("root")!).render(
         </Route>
       </Routes>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );

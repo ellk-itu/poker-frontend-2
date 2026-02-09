@@ -5,9 +5,9 @@ import HeroLogo from "./HeroLogo";
 
 export default function Hero() {
   return (
-    <div className="relative h-5/6">
+    <div className="relative h-[70vh] shrink-0">
       <HeroBackground />
-      <div className="flex flex-col justify-center w-screen flex-1 gap-4 px-24 z-10 relative h-full">
+      <div className="flex-down justify-center w-screen flex-1 gap-4 px-24 z-10 relative h-full">
         <HeroLogo />
         <HeroDesc />
         <div className="flex gap-2">

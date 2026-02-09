@@ -2,6 +2,9 @@ import { Link, Outlet } from "react-router";
 import LightModeIcon from "../assets/lightMode.svg?react";
 import NightModeIcon from "../assets/nightMode.svg?react";
 import { useEffect, useState } from "react";
+import AlertProvider from "../common/useAlert/AlertProvider";
+
+// Abstract the header to its own component
 
 export default function Layout() {
   const [currentTheme, setCurrentTheme] = useState(
@@ -52,9 +55,11 @@ export default function Layout() {
           </label>
         </div>
       </header>
-      <main className="bg-base-100 flex-1 flex">
-        <Outlet />
-      </main>
+      <AlertProvider>
+        <main className="bg-base-100 flex-1 flex">
+          <Outlet />
+        </main>
+      </AlertProvider>
       <footer></footer>
     </div>
   );
