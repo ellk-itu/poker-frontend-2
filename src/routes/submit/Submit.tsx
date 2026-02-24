@@ -7,16 +7,25 @@ export default function Submit() {
 
   const [formData, setFormData] = useState<{
     email?: string;
-    program?: string;
+    file?: File;
+    fileName?: string;
     table?: string;
   }>({});
 
   const submitForm = async () => {
     const baseURL = "https://api.pokerbot.dk";
 
-    if (!formData.email || !formData.program || !formData.table) {
+    if (!formData.email || !formData.file || !formData.table) {
       throw new Error("Missing Fields in form");
     }
+
+    const data = new FormData();
+
+    data.append("email", formData.email);
+    data.append("file", formData.file);
+    data.append("table", formData.table);
+
+    const extension = formData.fileName?.endsWith(".py") ? ".py" : ".java";
 
     try {
       await fetch(
@@ -25,14 +34,13 @@ export default function Submit() {
           formData.table +
           "/" +
           formData.email +
-          formData.program,
+          extension,
         {
           method: "POST",
-          body: JSON.stringify(formData),
+          body: data,
         },
       );
       alert("info", "File Uploaded successfully");
-      window.location.href = "/";
     } catch (error) {
       alert("error", "An error occurred: " + error);
     }
@@ -41,7 +49,7 @@ export default function Submit() {
   return (
     <div className="flex-1 flex min-h-[90vh]">
       <div className="flex-1 flex p-16 items-center justify-center">
-        <div className="w-3/5 min-w-[300px] flex-down gap-8">
+        <div className="w-3/5 min-w-sm flex-down gap-8">
           <p className="font-display-alternative text-4xl text-primary w-full">
             Submit Your Bot
           </p>
@@ -60,9 +68,13 @@ export default function Submit() {
               className="file-input input-lg input-primary w-full"
               type="file"
               accept=".py, .java"
+              multiple={false}
               onChange={(e) => {
                 setFormData(
-                  Object.assign(formData, { program: e.target.value }),
+                  Object.assign({}, formData, {
+                    file: (e.target.files as FileList)[0],
+                    fileName: e.target.value,
+                  }),
                 );
               }}
             />

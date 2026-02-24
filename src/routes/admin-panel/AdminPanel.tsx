@@ -1,28 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
 import { alertContext } from "../../common/useAlert/Alert";
-import { getTables } from "./serverWrapper";
-
-const key = "f662fbf9-8acb-46f3-b34a-8c77bdffb5e0";
+import { getTable, getTables, healthCheck } from "./serverWrapper";
 
 export default function AdminPanel() {
-  const apiKey = key;
+  const apiKey = localStorage.getItem("api-key") ?? "";
 
   const alert = useContext(alertContext);
   const [tables, setTables] = useState<Record<string, any>>();
 
+  console.log(apiKey);
+
   console.log(tables);
 
   useEffect(() => {
-    const loadTables = async () => {
-      try {
-        const tables = await getTables(apiKey);
-        setTables(tables);
-      } catch (error) {
-        alert("error", error as string);
-      }
-    };
+    getTables().then(console.log);
 
-    loadTables();
+    // const loadTables = async () => {
+    //   try {
+    //     const tables = await getTables(apiKey);
+    //     setTables(tables);
+    //   } catch (error) {
+    //     alert("error", error as string);
+    //   }
+    // };
+
+    // loadTables();
   }, [apiKey, alert]);
 
   // const isNumber = (n: string) => !isNaN(parseInt(n));
