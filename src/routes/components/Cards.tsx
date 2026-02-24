@@ -5,8 +5,8 @@ import { Link } from "react-router";
 
 export default function Cards() {
   return (
-    <div className="flex gap-8 p-16 z-10 w-7/8 self-center">
-      <div className="bg-base-200 flex-1 py-8 px-16 rounded-2xl flex flex-col gap-4">
+    <div className="flex-down gap-8 p-4 lg:p-16 z-10 min-h-[50vh] lg:flex-row max-w-screen">
+      <div className="bg-base-200 flex-1 p-8 rounded-2xl flex flex-col gap-4">
         <CodeIcon
           height={80}
           width={80}
@@ -59,7 +59,7 @@ export default function Cards() {
           </p>
         </div>
       </div>
-      <div className="bg-primary text-primary-content flex-1 py-8 px-16 rounded-2xl flex flex-col gap-4">
+      <div className="bg-primary text-primary-content flex-1 p-8 rounded-2xl flex flex-col gap-4">
         <BeerIcon
           height={80}
           width={80}

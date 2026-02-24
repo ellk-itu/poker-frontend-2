@@ -1,8 +1,8 @@
 export default function HeroDesc() {
   return (
     <p className="text-xl">
-      Something cool about how cool and <br />
-      awsomesauce poker bot is! :3
+      A classic game No Limit Texas Holdem <br />
+      where everyone is a robot
     </p>
   );
 }

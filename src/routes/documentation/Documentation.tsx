@@ -5,25 +5,29 @@ export default function Documentation() {
 
   return (
     <div className="flex flex-col items-center">
-      <article className="max-w-1/2">
-        <h1>{language === "python" ? "Python" : "Java"} Documentation</h1>
-        <div className="flex gap-2">
-          <button
-            className="btn btn-neutral"
-            onClick={() => {
-              setLanguage("java");
-            }}
-          >
-            Show java
-          </button>
-          <button
-            className="btn btn-neutral"
-            onClick={() => {
-              setLanguage("python");
-            }}
-          >
-            Show python
-          </button>
+      <article className="max-w-1/2 py-16">
+        <div className="bg-base-200 p-8 rounded-2xl shadow sticky">
+          <h1 className="mt-0">
+            {language === "python" ? "Python" : "Java"} Documentation
+          </h1>
+          <div className="flex gap-2">
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                setLanguage("java");
+              }}
+            >
+              Show java
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                setLanguage("python");
+              }}
+            >
+              Show python
+            </button>
+          </div>
         </div>
         <h2>Getting Started</h2>
         <h3>Basics</h3>

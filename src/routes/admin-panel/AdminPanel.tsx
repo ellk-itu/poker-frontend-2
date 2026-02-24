@@ -1,165 +1,165 @@
-// import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { alertContext } from "../../common/useAlert/Alert";
+import { getTables } from "./serverWrapper";
 
-// export default function AdminPanel() {
-//   const backendUrl = "https://api.pokerbot.dk";
-//   const apiKey = localStorage.getItem("api-key") ?? "";
+const key = "f662fbf9-8acb-46f3-b34a-8c77bdffb5e0";
 
-//   const [errorMessage, setErrorMessage] = useState<string>();
-//   const [tables, setTables] = useState<Record<string, any>>();
+export default function AdminPanel() {
+  const apiKey = key;
 
-//   useEffect(() => {
-//     loadTables();
-//   }, []);
+  const alert = useContext(alertContext);
+  const [tables, setTables] = useState<Record<string, any>>();
 
-//   const isNumber = (n: string) => !isNaN(parseInt(n));
+  console.log(tables);
 
-//   const loadTables = async () => {
-//     const resp = await fetch(backendUrl + "/files", {
-//       method: "GET",
-//       headers: {
-//         "X-API-KEY": apiKey,
-//       },
-//     });
+  useEffect(() => {
+    const loadTables = async () => {
+      try {
+        const tables = await getTables(apiKey);
+        setTables(tables);
+      } catch (error) {
+        alert("error", error as string);
+      }
+    };
 
-//     if (resp.status != 200) {
-//       setErrorMessage(await resp.text());
-//     }
+    loadTables();
+  }, [apiKey, alert]);
 
-//     setTables(await resp.json());
-//   };
+  // const isNumber = (n: string) => !isNaN(parseInt(n));
 
-//   const renderTable = () => {
-//     const tableElements: React.ReactNode[] = [];
+  // const renderTable = () => {
+  //   const tableElements: React.ReactNode[] = [];
 
-//     const renderFiles = (table: string[]) => {
-//       const renderTableFileElements: React.ReactNode[] = [];
+  //   const renderFiles = (table: string[]) => {
+  //     const renderTableFileElements: React.ReactNode[] = [];
 
-//       for (const filename of table) {
-//         renderTableFileElements.push(
-//           <li>
-//             <p>{filename}</p>
-//             <button
-//               className="btn btn-neutral"
-//               onClick={() => {
-//                 moveFile(filename);
-//               }}
-//             >
-//               Move
-//             </button>
-//             <button
-//               className="btn btn-neutral"
-//               onClick={() => {
-//                 deleteFile(filename);
-//               }}
-//             >
-//               Delete
-//             </button>
-//           </li>
-//         );
-//       }
+  //     for (const filename of table) {
+  //       renderTableFileElements.push(
+  //         <li>
+  //           <p>{filename}</p>
+  //           <button
+  //             className="btn btn-neutral"
+  //             onClick={() => {
+  //               moveFile(filename);
+  //             }}
+  //           >
+  //             Move
+  //           </button>
+  //           <button
+  //             className="btn btn-neutral"
+  //             onClick={() => {
+  //               deleteFile(filename);
+  //             }}
+  //           >
+  //             Delete
+  //           </button>
+  //         </li>,
+  //       );
+  //     }
 
-//       return renderTableFileElements;
-//     };
+  //     return renderTableFileElements;
+  //   };
 
-//     for (const tableName in tables) {
-//       tableElements.push(
-//         <div className="" key={tableName}>
-//           <h2>{`Table: ${tableName}`}</h2>
-//           <button
-//             className="btn btn-primary"
-//             onClick={() => {
-//               runTable(tableName);
-//             }}
-//           >
-//             Run Table
-//           </button>
-//           <p>Files</p>
-//           <ul>{renderFiles(tables[tableName])}</ul>
-//         </div>
-//       );
-//     }
+  //   for (const tableName in tables) {
+  //     tableElements.push(
+  //       <div className="" key={tableName}>
+  //         <h2>{`Table: ${tableName}`}</h2>
+  //         <button
+  //           className="btn btn-primary"
+  //           onClick={() => {
+  //             runTable(tableName);
+  //           }}
+  //         >
+  //           Run Table
+  //         </button>
+  //         <p>Files</p>
+  //         <ul>{renderFiles(tables[tableName])}</ul>
+  //       </div>,
+  //     );
+  //   }
 
-//     return tableElements;
-//   };
+  //   return tableElements;
+  // };
 
-//   // Popup that asks for table number to move file to another table
-//   function popup(fromTable, fileName) {
-//     let toTable = prompt("Please enter table number", "###").toLowerCase();
-//     if (toTable != null && isNumber(toTable)) {
-//       moveFile(fromTable, toTable, fileName);
-//     } else {
-//       alert("Invalid table number not a number");
-//     }
-//   }
+  // // Popup that asks for table number to move file to another table
+  // function popup(fromTable, fileName) {
+  //   let toTable = prompt("Please enter table number", "###").toLowerCase();
+  //   if (toTable != null && isNumber(toTable)) {
+  //     moveFile(fromTable, toTable, fileName);
+  //   } else {
+  //     alert("Invalid table number not a number");
+  //   }
+  // }
 
-//   async function moveFile(fromTable, toTable, fileName) {
-//     await fetch(`${backendUrl}/move/${fromTable}/${fileName}/${toTable}`, {
-//       method: "PUT",
-//       headers: {
-//         "X-API-KEY": apiKey,
-//       },
-//     });
-//     loadTables();
-//   }
+  // async function moveFile(fromTable, toTable, fileName) {
+  //   await fetch(`${backendUrl}/move/${fromTable}/${fileName}/${toTable}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "X-API-KEY": apiKey,
+  //     },
+  //   });
+  //   getTables();
+  // }
 
-//   async function deleteFile(tableName, fileName) {
-//     var confirmDelete = confirm(
-//       `Are you sure you want to delete ${fileName} from ${tableName}?`
-//     );
-//     if (!confirmDelete) return;
-//     await fetch(`${backendUrl}/delete/${tableName}/${fileName}`, {
-//       method: "Delete",
-//       headers: {
-//         "X-API-KEY": apiKey,
-//       },
-//     });
-//     loadTables();
-//   }
+  // async function deleteFile(tableName, fileName) {
+  //   var confirmDelete = confirm(
+  //     `Are you sure you want to delete ${fileName} from ${tableName}?`,
+  //   );
+  //   if (!confirmDelete) return;
+  //   await fetch(`${backendUrl}/delete/${tableName}/${fileName}`, {
+  //     method: "Delete",
+  //     headers: {
+  //       "X-API-KEY": apiKey,
+  //     },
+  //   });
+  //   getTables();
+  // }
 
-//   async function setTime() {
-//     const time = document.getElementById("timeInputField").value;
-//     await fetch(`${backendUrl}/set-time?time=${time}`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "X-API-KEY": apiKey,
-//       },
-//     });
-//     document.getElementById("timeInputField").value = "";
-//     getTime();
-//   }
+  // async function setTime() {
+  //   const time = document.getElementById("timeInputField").value;
+  //   await fetch(`${backendUrl}/set-time?time=${time}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "X-API-KEY": apiKey,
+  //     },
+  //   });
+  //   document.getElementById("timeInputField").value = "";
+  //   getTime();
+  // }
 
-//   async function getTime() {
-//     const timeField = document.getElementById("currentTime");
+  // async function getTime() {
+  //   const timeField = document.getElementById("currentTime");
 
-//     const resp = await fetch(`${backendUrl}/get-time`);
-//     const time = await resp.text();
-//     timeField.textContent = "Time: " + time;
-//   }
+  //   const resp = await fetch(`${backendUrl}/get-time`);
+  //   const time = await resp.text();
+  //   timeField.textContent = "Time: " + time;
+  // }
 
-//   async function runTable(tableName, numberOfWinners = 1) {
-//     const winnersPrTable =
-//       document.getElementById("winnersInputField").value || numberOfWinners;
-//     await fetch(`${backendUrl}/run/${tableName}/${winnersPrTable}`, {
-//       method: "GET",
-//       headers: {
-//         "X-API-KEY": apiKey,
-//       },
-//     });
-//     loadTables();
-//   }
+  // async function runTable(tableName, numberOfWinners = 1) {
+  //   const winnersPrTable =
+  //     document.getElementById("winnersInputField").value || numberOfWinners;
+  //   await fetch(`${backendUrl}/run/${tableName}/${winnersPrTable}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "X-API-KEY": apiKey,
+  //     },
+  //   });
+  //   getTables();
+  // }
 
-//   getTime();
-//   loadTables();
+  // getTime();
+  // getTables();
 
-//   return (
-//     <>
-//       <div className="tables">{renderTable()}</div>
-//       {errorMessage ? (
-//         <div className="alert alert-error">{errorMessage}</div>
-//       ) : (
-//         <></>
-//       )}
-//     </>
-//   );
-// }
+  // return (
+  //   <>
+  //     <div className="tables">{renderTable()}</div>
+  //     {errorMessage ? (
+  //       <div className="alert alert-error">{errorMessage}</div>
+  //     ) : (
+  //       <></>
+  //     )}
+  //   </>
+  // );
+  return <></>;
+}

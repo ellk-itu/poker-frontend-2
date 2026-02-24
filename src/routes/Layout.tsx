@@ -1,8 +1,7 @@
 import { Link, Outlet } from "react-router";
-import LightModeIcon from "../assets/lightMode.svg?react";
-import NightModeIcon from "../assets/nightMode.svg?react";
 import { useEffect, useState } from "react";
 import AlertProvider from "../common/useAlert/AlertProvider";
+import Header from "./components/Header";
 
 // Abstract the header to its own component
 
@@ -22,45 +21,54 @@ export default function Layout() {
 
   return (
     <div className="m-0 min-h-screen flex flex-col">
-      <header className="flex px-8 py-4 bg-base-200 items-center z-50">
-        <Link to={"/"} className="flex-1 font-display m-0 h-fit">
-          Poker <span className="text-primary">Bot</span> Battles
-        </Link>
-        <div className="flex gap-2">
-          <Link to={"/sign-up"} className="btn btn-primary">
-            Sign Up
-          </Link>
-          <Link to={"/get-started"} className="btn btn-neutral">
-            Get Started
-          </Link>
-          <Link to={"/documentation"} className="btn btn-neutral">
-            Documentation
-          </Link>
-          <Link to={"/submit"} className="btn btn-neutral">
-            Submit Your Bot
-          </Link>
-          <Link to={"/admin-panel"} className="btn btn-neutral">
-            Login
-          </Link>
-          <label className="swap swap-rotate px-4">
-            <input
-              type="checkbox"
-              checked={!currentTheme}
-              onClick={() => {
-                setCurrentTheme(!currentTheme);
-              }}
-            />
-            <LightModeIcon className="swap-on h-7 aspect-square fill-base-content" />
-            <NightModeIcon className="swap-off h-7 aspect-square fill-base-content" />
-          </label>
-        </div>
-      </header>
+      <Header
+        currentTheme={currentTheme}
+        onThemeChange={() => {
+          setCurrentTheme(!currentTheme);
+        }}
+      />
       <AlertProvider>
         <main className="bg-base-100 flex-1 flex">
           <Outlet />
         </main>
       </AlertProvider>
-      <footer></footer>
+      <footer className="flex p-8 bg-base-200">
+        <div className="flex-1">
+          <h3>Contact</h3>
+          <p className="text-base">pokerbot@itu.dk</p>
+          <h3>Projects</h3>
+          <p className="text-base">
+            <a
+              href="https://github.com/poker-bot-battles?view_as=public"
+              className="link"
+            >
+              Pokerbot GitHub
+            </a>
+          </p>
+        </div>
+        <div className=""></div>
+        <div className="flex-1 flex-down gap-2">
+          <h3>Links</h3>
+          <Link className="link" to="/">
+            Home
+          </Link>
+          <Link className="link" to="/documentation">
+            Documentation
+          </Link>
+          <Link className="link" to="/get-started">
+            Get Started
+          </Link>
+          <Link className="link" to="/sign-up">
+            Sign Up
+          </Link>
+          <Link className="link" to="/submit">
+            Submit Code
+          </Link>
+          <Link className="link" to="/admin-panel">
+            Admin Panel
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
