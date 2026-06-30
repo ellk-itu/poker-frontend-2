@@ -24,6 +24,9 @@ export default function Header(props: {
         <Link to={"/submit"} className="btn btn-neutral">
           Submit Your Bot
         </Link>
+        <Link to={"/visual-codespace"} className="btn btn-neutral">
+          Program
+        </Link>
         <label className="swap swap-rotate px-4">
           <input
             type="checkbox"
